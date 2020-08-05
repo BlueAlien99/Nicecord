@@ -1,0 +1,22 @@
+.bg{
+  margin: auto;
+  width: 512px;
+  height: 512px;
+  background: linear-gradient(135deg, cornflowerblue, transparent 80%),
+              linear-gradient(225deg, steelblue, transparent 100%),
+              lightslategray;
+  display: grid;
+  align-items: center;
+  /* border-radius: 50%; */
+}
+
+.bg p{
+  margin: 0;
+  text-align: center;
+  font-size: 128px;
+  font-style: italic;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-transform: uppercase;
+  color: darkslateblue;
+  text-shadow: 8px 8px 2px slateblue;
+}
