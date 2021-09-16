@@ -3,6 +3,8 @@ import pickle
 
 from pathlib import Path
 
+from utils import fetchUserName
+
 class User:
 
 	def __init__(self, id, name):
@@ -16,7 +18,12 @@ class User:
 	def nice(self, name = ''):
 		self.count += 1
 
-		if name != '':
+		if name != '' and False:
+			self.name = name
+
+	async def updateName(self, gid):
+		name = await fetchUserName(self.id, gid)
+		if name != None:
 			self.name = name
 
 class Scoreboard:
@@ -53,6 +60,10 @@ class Scoreboard:
 		pickle.dump(self.board, open(f'niceData/{self.gid}.bin', 'wb'))
 
 		return self.getLeaderboard(i)
+
+	async def updateUsernames(self):
+		for user in self.board:
+			await user.updateName(self.gid)
 
 	def getLeaderboard(self, i):
 		ret = '𝓷𝓲𝓬𝓮 ☜(ﾟヮﾟ☜)\n\nNice Leaderboard\n'

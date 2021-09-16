@@ -5,6 +5,8 @@ from discord.ext import commands
 
 from dataclasses import Scoreboard
 
+import utils
+
 bot = commands.Bot(command_prefix = '.')
 
 @bot.event
@@ -25,6 +27,7 @@ async def on_message(msg):
 		return
 
 	scoreboard = Scoreboard(guild.id)
+	await scoreboard.updateUsernames()
 	reply = scoreboard.nice(user.id, user.display_name)
 
 	print('>>>> ---- <<<< ---- >>>> ---- <<<<\n')
@@ -37,4 +40,5 @@ async def on_message(msg):
 with open('.secret', 'r') as f:
 	secret = f.read()
 
+utils.init(bot)
 bot.run(secret)
