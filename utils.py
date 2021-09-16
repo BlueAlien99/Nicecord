@@ -8,10 +8,18 @@ def init(bot):
     botReference = bot
 
 async def fetchUserName(id, gid):
-    guild = await botReference.fetch_guild(gid)
-    member = await guild.fetch_member(id)
-    if member == None or member.nick == None:
-        user = await botReference.fetch_user(id)
-        return None if user == None else user.name
+    fetch_failed = False
+    try:
+        guild = await botReference.fetch_guild(gid)
+        member = await guild.fetch_member(id)
+    except:
+        fetch_failed = True
+    if fetch_failed or member == None or member.nick == None:
+        fetch_failed = False
+        try:
+            user = await botReference.fetch_user(id)
+        except:
+            fetch_failed = True
+        return None if fetch_failed or user == None else user.name
     else:
         return member.nick
