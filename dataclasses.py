@@ -15,11 +15,8 @@ class User:
 	def __str__(self):
 		return f'{self.id} + {self.name} + {self.count}'
 
-	def nice(self, name = ''):
+	def nice(self):
 		self.count += 1
-
-		if name != '' and False:
-			self.name = name
 
 	async def updateName(self, gid):
 		name = await fetchUserName(self.id, gid)
@@ -43,7 +40,7 @@ class Scoreboard:
 		i = -1
 		try:
 			i = [ x.id for x in self.board ].index(id)
-			self.board[i].nice(name)
+			self.board[i].nice()
 			while i > 0 and self.board[i].count > self.board[i-1].count:
 				self.board[i], self.board[i-1] = self.board[i-1], self.board[i]
 				i -= 1
