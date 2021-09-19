@@ -1,11 +1,9 @@
 import asyncio
 import json
 import pickle
-
 from pathlib import Path
 
 from user import User
-
 
 NUM_OF_TOP_USERS = 3
 
