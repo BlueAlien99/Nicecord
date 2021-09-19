@@ -27,8 +27,7 @@ async def on_message(msg):
 		return
 
 	scoreboard = Scoreboard(guild.id)
-	await scoreboard.update_usernames(bot)
-	reply = scoreboard.nice(user.id, user.display_name)
+	reply = await scoreboard.nice(user.id, user.display_name, bot)
 
 	print('>>>> ---- <<<< ---- >>>> ---- <<<<\n')
 	print(f'{guild.name}\n{guild.id}\n{user.display_name}\n{msg.content}\n')
