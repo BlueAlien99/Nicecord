@@ -1,17 +1,17 @@
 import re
 
-import discord
 from discord.ext import commands
 
-from dataclasses import Scoreboard
+from scoreboard import Scoreboard
 
-import utils
 
-bot = commands.Bot(command_prefix = '.')
+bot = commands.Bot(command_prefix='.')
+
 
 @bot.event
 async def on_ready():
 	print('Bot is ready. Nice.\n')
+
 
 @bot.event
 async def on_message(msg):
@@ -23,11 +23,11 @@ async def on_message(msg):
 	# remove discord's markdown and whitespaces
 	cleanMsg = re.sub(r'(\*|_|~|`|>|\||\s)', '', msg.content)
 
-	if user.bot == True or cleanMsg.lower() != 'nice':
+	if user.bot is True or cleanMsg.lower() != 'nice':
 		return
 
 	scoreboard = Scoreboard(guild.id)
-	await scoreboard.updateUsernames()
+	await scoreboard.update_usernames(bot)
 	reply = scoreboard.nice(user.id, user.display_name)
 
 	print('>>>> ---- <<<< ---- >>>> ---- <<<<\n')
@@ -40,5 +40,4 @@ async def on_message(msg):
 with open('.secret', 'r') as f:
 	secret = f.read()
 
-utils.init(bot)
 bot.run(secret)

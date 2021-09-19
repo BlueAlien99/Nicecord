@@ -1,5 +1,7 @@
+.idea
+
+__pycache__
+
 niceData/*
 
 .secret
-
-__pycache__
