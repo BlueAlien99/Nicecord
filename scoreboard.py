@@ -44,16 +44,19 @@ class Scoreboard:
             await user.update_name(bot, self.guild_id)
 
     def get_leaderboard(self, i):
+        def format_entry(pos, name, count):
+            return f'**{pos}.** {name} at **{count} {"nice" if count == 1 else "nices"}**\n'
+
         ret = '𝓷𝓲𝓬𝓮 ☜(ﾟヮﾟ☜)\n\nNice Leaderboard\n'
 
         for k, x in enumerate(self.board[:3]):
-            ret += f'**{k + 1}.** {x.name} at **{x.count} nices**\n'
+            ret += format_entry(k + 1, x.name, x.count)
 
         if i < 3:
             return ret
         elif i > 3:
             ret += '**...**\n'
 
-        ret += f'**{i + 1}.** {self.board[i].name} at **{self.board[i].count} nices**\n'
+        ret += format_entry(i + 1, self.board[i].name, self.board[i].count)
 
         return ret
