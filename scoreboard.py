@@ -18,11 +18,7 @@ class Scoreboard:
             except:
                 with open(f'niceData/{guild_id}.json', 'r') as f:
                     backupData = json.load(f)
-                    self.board = []
-                    for entry in backupData:
-                        user = User(entry['id'], entry['name'])
-                        user.count = entry['count']
-                        self.board.append(user)
+                    self.board = [User(entry['id'], entry['name'], entry['count']) for entry in backupData]
         except (FileNotFoundError, EOFError):
             self.board = []
         except Exception:
