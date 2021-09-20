@@ -6,6 +6,14 @@ from scoreboard import Scoreboard
 
 bot = commands.Bot(command_prefix='.')
 
+scoreboards = {}
+
+
+def get_scoreboard(guild_id):
+    if guild_id not in scoreboards:
+        scoreboards[guild_id] = Scoreboard(guild_id)
+    return scoreboards[guild_id]
+
 
 @bot.event
 async def on_ready():
@@ -24,7 +32,7 @@ async def on_message(msg):
     if user.bot is True or cleanMsg.lower() != 'nice':
         return
 
-    scoreboard = Scoreboard(guild.id)
+    scoreboard = get_scoreboard(guild.id)
     reply = await scoreboard.nice(user.id, user.display_name, bot)
 
     print('>>>> ---- <<<< ---- >>>> ---- <<<<\n')
