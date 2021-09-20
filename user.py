@@ -1,7 +1,7 @@
 class User:
-    def __init__(self, user_id, name):
+    def __init__(self, user_id, name, count=1):
         self.id = user_id
-        self.count = 1
+        self.count = count
         self.name = name
 
     def nice(self, name):
