@@ -13,7 +13,16 @@ class Scoreboard:
         self.guild_id = guild_id
         try:
             Path('niceData').mkdir(exist_ok=True)
-            self.board = pickle.load(open(f'niceData/{guild_id}.bin', 'rb'))
+            try:
+                self.board = pickle.load(open(f'niceData/{guild_id}.bin', 'rb'))
+            except:
+                with open(f'niceData/{guild_id}.json', 'r') as f:
+                    backupData = json.load(f)
+                    self.board = []
+                    for entry in backupData:
+                        user = User(entry['id'], entry['name'])
+                        user.count = entry['count']
+                        self.board.append(user)
         except (FileNotFoundError, EOFError):
             self.board = []
         except Exception:
