@@ -1,8 +1,16 @@
 class User:
+    @staticmethod
+    def from_json(entry):
+        keys = ['id', 'name', 'count']
+        if all(entry.get(key) for key in keys):
+            return User(*(entry[key] for key in keys))
+        else:
+            return None
+
     def __init__(self, user_id, name, count=1):
         self.id = user_id
-        self.count = count
         self.name = name
+        self.count = count
 
     def nice(self, name):
         self.count += 1

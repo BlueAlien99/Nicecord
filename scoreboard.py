@@ -1,6 +1,5 @@
 import asyncio
 import json
-import pickle
 from pathlib import Path
 
 from user import User
@@ -13,12 +12,8 @@ class Scoreboard:
         self.guild_id = guild_id
         try:
             Path('niceData').mkdir(exist_ok=True)
-            try:
-                self.board = pickle.load(open(f'niceData/{guild_id}.bin', 'rb'))
-            except:
-                with open(f'niceData/{guild_id}.json', 'r') as f:
-                    backupData = json.load(f)
-                    self.board = [User(entry['id'], entry['name'], entry['count']) for entry in backupData]
+            with open(f'niceData/{guild_id}.json', 'r') as file:
+                self.board = list(filter(None, [User.from_json(entry) for entry in json.load(file)]))
         except (FileNotFoundError, EOFError):
             self.board = []
         except Exception:
@@ -40,12 +35,9 @@ class Scoreboard:
 
         await self.update_usernames(bot)
 
-        # not necessary, only so that an admin can read the contents of a "database"
         boardDict = list(map(lambda x: vars(x), self.board))
         with open(f'niceData/{self.guild_id}.json', 'w') as file:
             json.dump(boardDict, file)
-
-        pickle.dump(self.board, open(f'niceData/{self.guild_id}.bin', 'wb'))
 
         return self.get_leaderboard(i)
 
