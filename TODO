@@ -1,0 +1,13 @@
+- merge (or close) edgeboyo's PR (presence msg)
+- add niceData.zip (or any niceData) to .gitignore
+- add requirements.txt
+
+- add typing!
+- remove heroku-related stuff
+
+- voice text chat
+- delete previous messages
+- /leaderboard
+- "nice?"
+- nice reacts
+
