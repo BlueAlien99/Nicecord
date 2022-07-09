@@ -1,13 +1,13 @@
 - merge (or close) edgeboyo's PR (presence msg)
-- add niceData.zip (or any niceData) to .gitignore
-- add requirements.txt
 
 - add typing!
-- remove heroku-related stuff
+- project structure and lib versions
 
 - voice text chat
 - delete previous messages
 - /leaderboard
 - "nice?"
 - nice reacts
+
+https://towardsdatascience.com/simple-trick-to-work-with-relative-paths-in-python-c072cdc9acb9
 
