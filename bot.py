@@ -1,6 +1,7 @@
 import re
 
 from discord.ext import commands
+from discord import Game
 
 from scoreboard import Scoreboard
 
@@ -18,7 +19,7 @@ def get_scoreboard(guild_id):
 @bot.event
 async def on_ready():
     print('Bot is ready. Nice.\n')
-
+    await bot.change_presence(activity=Game('nice ;)'))
 
 @bot.event
 async def on_message(msg):
